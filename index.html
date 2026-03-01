@@ -3,64 +3,127 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SMART PDF INDIA | Pro Tool</title>
+    <title>Smart PDF India | Professional PDF Suite</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        .gradient-bg { background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%); }
+        .glass-morphism { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); }
+        .hero-gradient { background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%); }
+        .loading-bar { transition: width 0.5s ease-in-out; }
     </style>
 </head>
-<body class="bg-gray-100 min-h-screen flex items-center justify-center p-4">
-    <div class="max-w-md w-full bg-white rounded-2xl shadow-2xl overflow-hidden">
-        <div class="gradient-bg p-8 text-white text-center">
-            <h1 class="text-3xl font-bold tracking-tight">SMART PDF INDIA</h1>
-            <p class="text-sm opacity-80 mt-2">World's #1 Digital PDF Utility</p>
+<body class="bg-gray-50 min-h-screen font-sans">
+
+    <!-- Safety Banner -->
+    <div class="bg-green-600 text-white py-2 px-4 text-center text-sm font-bold shadow-md">
+        <i class="fas fa-shield-alt mr-2"></i> 100% SAFE & SECURE: We do not store your files. All documents are processed in-memory and deleted instantly.
+    </div>
+
+    <!-- Main Header -->
+    <header class="hero-gradient text-white py-12 px-6 shadow-xl">
+        <div class="max-w-4xl mx-auto text-center">
+            <h1 class="text-5xl font-extrabold tracking-tighter mb-4">SMART PDF INDIA</h1>
+            <p class="text-xl opacity-90">The World's Most Powerful & Private PDF Editor</p>
         </div>
-        
-        <div class="p-8">
-            <form action="/upload" method="POST" enctype="multipart/form-data" class="space-y-6">
-                <!-- File Upload Box -->
-                <div id="drop-zone" class="border-2 border-dashed border-blue-300 rounded-xl p-6 text-center hover:border-blue-500 transition">
-                    <input type="file" name="pdf" id="file" class="hidden" accept="application/pdf" required onchange="updateFileName()">
-                    <label for="file" class="cursor-pointer">
-                        <svg class="mx-auto h-12 w-12 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/></svg>
-                        <span id="file-name" class="mt-2 block text-sm font-medium text-gray-600 font-bold">Select PDF File</span>
+    </header>
+
+    <main class="max-w-4xl mx-auto -mt-10 p-4">
+        <div class="glass-morphism rounded-3xl shadow-2xl p-8 border border-white">
+            
+            <form id="pdfForm" action="/process" method="POST" enctype="multipart/form-data" class="space-y-8">
+                
+                <!-- File Selection Zone -->
+                <div id="dropZone" class="border-4 border-dashed border-blue-200 rounded-2xl p-10 text-center hover:border-blue-500 transition-all cursor-pointer bg-blue-50">
+                    <input type="file" name="pdfs" id="fileInput" class="hidden" accept="application/pdf" multiple required>
+                    <label for="fileInput" class="cursor-pointer">
+                        <i class="fas fa-cloud-upload-alt text-6xl text-blue-500 mb-4"></i>
+                        <span id="fileName" class="block text-lg font-bold text-gray-700">Drop PDF files here or click to upload</span>
+                        <span class="text-sm text-gray-500">Supports multiple files for merging</span>
                     </label>
                 </div>
 
-                <!-- Feature Options -->
-                <div class="space-y-4">
-                    <label class="block text-sm font-semibold text-gray-700">Choose Feature:</label>
-                    <div class="flex items-center space-x-4">
-                        <label class="flex items-center cursor-pointer">
-                            <input type="radio" name="feature" value="watermark" checked class="text-blue-600">
-                            <span class="ml-2 text-sm text-gray-600">Watermark</span>
-                        </label>
-                        <label class="flex items-center cursor-pointer">
-                            <input type="radio" name="feature" value="password" class="text-blue-600">
-                            <span class="ml-2 text-sm text-red-500 font-bold">Locker (Password)</span>
-                        </label>
+                <!-- Tools Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Watermark & Text -->
+                    <div class="p-4 border rounded-xl bg-gray-50">
+                        <h3 class="font-bold text-blue-800 mb-3"><i class="fas fa-pen-nib mr-2"></i> Add Text / Watermark</h3>
+                        <input type="text" name="watermarkText" placeholder="Enter your name or text" class="w-full p-3 rounded-lg border focus:ring-2 focus:ring-blue-500 outline-none">
+                    </div>
+
+                    <!-- Signature / Seal -->
+                    <div class="p-4 border rounded-xl bg-gray-50">
+                        <h3 class="font-bold text-blue-800 mb-3"><i class="fas fa-file-signature mr-2"></i> Digital Seal / Signature</h3>
+                        <input type="file" name="signature" accept="image/*" class="text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:bg-blue-100 file:text-blue-700 hover:file:bg-blue-200">
+                    </div>
+
+                    <!-- Security -->
+                    <div class="p-4 border rounded-xl bg-gray-50">
+                        <h3 class="font-bold text-blue-800 mb-3"><i class="fas fa-lock mr-2"></i> Protect with Password</h3>
+                        <input type="password" name="password" placeholder="Set PDF Password" class="w-full p-3 rounded-lg border focus:ring-2 focus:ring-blue-500 outline-none">
+                    </div>
+
+                    <!-- Automation -->
+                    <div class="p-4 border rounded-xl bg-gray-50 flex items-center justify-between">
+                        <div>
+                            <h3 class="font-bold text-blue-800">Smart Merge</h3>
+                            <p class="text-xs text-gray-500">Auto-combines multiple PDFs</p>
+                        </div>
+                        <div class="text-2xl text-blue-500"><i class="fas fa-layer-group"></i></div>
                     </div>
                 </div>
 
-                <input type="text" name="passkey" placeholder="Enter Password" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 outline-none">
+                <!-- Progress Bar (Hidden by default) -->
+                <div id="progressArea" class="hidden">
+                    <div class="flex justify-between mb-1">
+                        <span class="text-sm font-medium text-blue-700" id="statusText">Processing...</span>
+                        <span class="text-sm font-medium text-blue-700" id="percentText">0%</span>
+                    </div>
+                    <div class="w-full bg-gray-200 rounded-full h-4">
+                        <div id="progressBar" class="bg-blue-600 h-4 rounded-full loading-bar" style="width: 0%"></div>
+                    </div>
+                </div>
 
-                <button type="submit" class="w-full gradient-bg text-white font-bold py-4 rounded-xl shadow-lg hover:scale-105 transition transform">
-                    START PROCESSING 🚀
+                <button type="submit" onclick="startLoading()" class="w-full hero-gradient text-white font-black py-5 rounded-2xl shadow-xl hover:scale-[1.02] transition-transform text-xl flex items-center justify-center">
+                    EXECUTE SMART PROCESS 🚀
                 </button>
+
             </form>
         </div>
-    </div>
+        
+        <footer class="mt-10 text-center text-gray-500 text-sm">
+            <p>&copy; 2024 Smart PDF India | No. 1 Secure PDF Ecosystem</p>
+            <p class="mt-2 font-bold text-blue-600">Built for Freedom. Built for India.</p>
+        </footer>
+    </main>
 
     <script>
-        // File select karne par naam dikhane ke liye
-        function updateFileName() {
-            const input = document.getElementById('file');
-            const fileName = document.getElementById('file-name');
-            if (input.files.length > 0) {
-                fileName.innerHTML = "Selected: " + input.files[0].name;
-                fileName.classList.add("text-blue-600");
-                document.getElementById('drop-zone').classList.add("bg-blue-50");
+        const fileInput = document.getElementById('fileInput');
+        const fileName = document.getElementById('fileName');
+        const progressArea = document.getElementById('progressArea');
+        const progressBar = document.getElementById('progressBar');
+        const percentText = document.getElementById('percentText');
+
+        fileInput.addEventListener('change', (e) => {
+            const files = e.target.files;
+            if (files.length > 0) {
+                fileName.innerText = files.length > 1 ? `${files.length} Files Selected` : files[0].name;
             }
+        });
+
+        function startLoading() {
+            if(fileInput.files.length === 0) return;
+            progressArea.classList.remove('hidden');
+            let width = 0;
+            const interval = setInterval(() => {
+                if (width >= 95) {
+                    clearInterval(interval);
+                } else {
+                    width += Math.random() * 10;
+                    if(width > 95) width = 95;
+                    progressBar.style.width = width + '%';
+                    percentText.innerText = Math.floor(width) + '%';
+                }
+            }, 400);
         }
     </script>
 </body>
