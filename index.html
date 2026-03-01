@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bawal PDF Editor | Pro Tool</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .gradient-bg { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center p-4">
+    <div class="max-w-md w-full bg-white rounded-2xl shadow-2xl overflow-hidden">
+        <div class="gradient-bg p-8 text-white text-center">
+            <h1 class="text-3xl font-bold italic">BAWAL PDF</h1>
+            <p class="text-sm opacity-80 mt-2">Duniya ka No. 1 Digital Tool</p>
+        </div>
+        
+        <div class="p-8">
+            <form action="/upload" method="POST" enctype="multipart/form-data" class="space-y-6">
+                <!-- File Upload Box -->
+                <div class="border-2 border-dashed border-gray-300 rounded-xl p-6 text-center hover:border-indigo-500 transition">
+                    <input type="file" name="pdf" id="file" class="hidden" accept="application/pdf" required>
+                    <label for="file" class="cursor-pointer">
+                        <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/></svg>
+                        <span class="mt-2 block text-sm font-medium text-gray-600">PDF File Select Karo</span>
+                    </label>
+                </div>
+
+                <!-- Feature Options -->
+                <div class="space-y-4">
+                    <label class="block text-sm font-semibold text-gray-700">Tool Feature Chuno:</label>
+                    <div class="flex items-center space-x-4">
+                        <label class="flex items-center cursor-pointer">
+                            <input type="radio" name="feature" value="watermark" checked class="text-indigo-600">
+                            <span class="ml-2 text-sm text-gray-600">Watermark</span>
+                        </label>
+                        <label class="flex items-center cursor-pointer">
+                            <input type="radio" name="feature" value="password" class="text-indigo-600">
+                            <span class="ml-2 text-sm text-gray-600 text-red-500 font-bold">Locker (Password)</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Password Input (Hidden by Default) -->
+                <input type="text" name="passkey" placeholder="Password Set Karo" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-indigo-500 outline-none">
+
+                <button type="submit" class="w-full gradient-bg text-white font-bold py-4 rounded-xl shadow-lg hover:scale-105 transition transform">
+                    KAAM SHURU KARO 🚀
+                </button>
+            </form>
+        </div>
+        <div class="bg-gray-50 p-4 text-center text-xs text-gray-400">
+            No Tracking • No Data Saving • 100% Azaadi
+        </div>
+    </div>
+</body>
+</html>
