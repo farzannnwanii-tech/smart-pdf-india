@@ -16,7 +16,7 @@ app.post('/upload', upload.single('pdf'), async (req, res) => {
         if (feature === 'watermark') {
             const pages = pdfDoc.getPages();
             pages.forEach(page => {
-                page.drawText('BAWAL PDF TOOL', { x: 50, y: 50, size: 20, color: rgb(0.5, 0.5, 0.5), opacity: 0.5 });
+                page.drawText('SMART PDF INDIA', { x: 50, y: 50, size: 20, color: rgb(0.5, 0.5, 0.5), opacity: 0.5 });
             });
         } 
         
